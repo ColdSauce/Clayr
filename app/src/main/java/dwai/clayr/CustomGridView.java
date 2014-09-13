@@ -3,44 +3,48 @@ package dwai.clayr;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Stefan on 9/13/2014.
  */
 public class CustomGridView {
-    private Context context;
-    private int currentCols,currentRows = 0;
-    private int currentHeight = 0;
-    private int maxHeight = 0;
-    private int maxWidth = 0;
-    public CustomGridView(Context c,int maxHeight,int maxWidth){
-        context = c;
-        this.maxHeight = maxHeight;
-        this.maxWidth = maxWidth;
+    private View parentView;
+    private List<GridElement> elements = new ArrayList<GridElement>();
+
+    public CustomGridView(View v, int maxHeight, int maxWidth) {
+        parentView = v;
+        parentView = ((LinearLayout) parentView.findViewById(R.id.rootHistoryGrid));
     }
 
-    public void addGridElement(GridElement e){
-        
-    }
+    public void addGridElement(GridElement e) {
+        elements.add(e);
 
-    private class GridElement {
-        private Bitmap img;
-        public GridElement(Bitmap img){
-            this.img = img;
-        }
-        public void showImage(ImageView imageView){
-            Log.e("NULL","EITHER THE IMAGE VIEW OR THE BITMAP IS NULL!");
-            if(imageView == null || img == null){
-                return;
+        ViewGroup parentViewGroup = ((ViewGroup) parentView);
+        for (int i = 0; i < parentViewGroup.getChildCount(); i++) {
+            LinearLayout currentLayout = ((LinearLayout) parentViewGroup.getChildAt(i));
+
+            int lastChildNumber = currentLayout.getChildCount();
+            if (lastChildNumber % 3 != 0) {
+                currentLayout.addView(e);
+            } else {
+                LinearLayout layoutToAdd = new LinearLayout(parentView.getContext());
+                ((ViewGroup) parentView).addView(layoutToAdd);
+                layoutToAdd.addView(e);
             }
-            imageView.setImageBitmap(img);
         }
 
-    }
 
+    }
 
 
 }
+
