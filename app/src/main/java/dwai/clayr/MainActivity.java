@@ -1,6 +1,7 @@
 package dwai.clayr;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +26,11 @@ public class MainActivity extends Activity {
         final ViewGroup mContainer = (ViewGroup) findViewById(
                 android.R.id.content).getRootView();
         MainActivity.setAppFont(mContainer, mFont, true);
+    }
+
+    public void clickedLogin(View v){
+        Intent i = new Intent(MainActivity.this, HistoryActivity.class);
+        startActivity(i);
     }
 
 

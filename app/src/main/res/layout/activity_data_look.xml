@@ -1,0 +1,56 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dwai.clayr.DataLookActivity"
+    android:id = "@+id/rootScrollView"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id = "@+id/rootLinearLayout"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textSize = "20sp"
+            android:gravity="center"
+            android:text = "TEST DETAILS"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eaeaea"
+            android:paddingBottom="40dp"
+            android:layout_marginBottom="30dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="65sp"
+                android:text = "CRP"
+                android:id = "@+id/acroWord"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="80dp"
+                />
+            <TextView
+                android:id = "@+id/smallTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize = "20sp"
+            android:paddingBottom="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+
+                android:text = "a protein linked to blood vessel inflammation"
+
+                />
+
+            </LinearLayout>
+
+        </LinearLayout>
+</ScrollView>

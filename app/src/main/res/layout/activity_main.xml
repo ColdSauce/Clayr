@@ -27,7 +27,7 @@
             android:layout_marginTop="20dp"
             android:textSize="25sp"
             android:gravity="center"
-            android:layout_width="250dp  "
+            android:layout_width="250dp"
             android:hint="username"
             android:singleLine="true"
             android:layout_gravity="center"
@@ -44,6 +44,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content" />
         <Button
+            android:onClick="clickedLogin"
             android:layout_marginTop="20dp"
 
             android:layout_width="100dp"
