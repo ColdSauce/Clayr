@@ -1,11 +1,67 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="0.8"
-        android:layout_height="100dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="60sp"
+            android:id = "@+id/theTitle"
+            android:text = "clayr" />
+
+
+
+
+
+    <EditText
+            android:layout_marginTop="20dp"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:layout_width="250dp  "
+            android:hint="username"
+            android:singleLine="true"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+
+    <EditText
+            android:layout_marginTop="20dp"
+            android:textSize="25sp"
+            android:layout_width="250dp"
+            android:singleLine="true"
+            android:password="true"
+            android:hint="password"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_marginTop="20dp"
+
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_green_dark"
+            android:textColor="@android:color/white"
+            android:text="login"
+            />
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_green_dark"
+            android:textColor="@android:color/white"
+            android:text="sign up"
+            />
+        </LinearLayout>
+
+</RelativeLayout>
