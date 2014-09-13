@@ -8,6 +8,7 @@
     <LinearLayout
         android:id = "@+id/rootHistoryGrid"
         android:layout_width="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_height="0dp">

@@ -10,15 +10,10 @@ public class GridElement extends ImageView {
     public GridElement(Context c, Bitmap img){
         super(c);
         this.img = img;
+        this.setImageBitmap(img);
 
     }
-    public void showImage(ImageView imageView){
-        Log.e("NULL", "EITHER THE IMAGE VIEW OR THE BITMAP IS NULL!");
-        if(imageView == null || img == null){
-            return;
-        }
-        imageView.setImageBitmap(img);
-    }
+
 
 }
 
