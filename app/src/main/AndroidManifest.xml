@@ -20,9 +20,11 @@
         </activity>
         <activity
             android:name=".HistoryActivity"
-            android:label="@string/title_activity_history" >
+            android:theme = "@style/mainTheme"
+            android:label="No name here" >
         </activity>
         <activity
+
             android:name=".DataLookActivity"
             android:label="@string/title_activity_data_look" >
         </activity>

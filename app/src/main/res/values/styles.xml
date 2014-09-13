@@ -3,9 +3,16 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+    <style name="mainTheme" parent="@android:style/Theme.Holo.Light">
 
-    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@android:color/holo_blue_light</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
 
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/lightBlue</item>
+        <item name = "android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>
+    </style>
+    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

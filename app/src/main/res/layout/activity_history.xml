@@ -8,19 +8,15 @@
     <LinearLayout
         android:id = "@+id/rootHistoryGrid"
         android:layout_width="match_parent"
-        android:gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_height="0dp">
 
         </LinearLayout>
-    <Button
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:onClick="takePicture"
-        android:layout_height="50dp"
-        android:text = "take a pic"
-        />
 
     </LinearLayout>

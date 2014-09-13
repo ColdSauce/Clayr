@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,10 +54,18 @@ public class HistoryActivity extends Activity {
 //        Intent i = new Intent(HistoryActivity.this, DataLookActivity.class);
 //        startActivity(i);
         cgv = new CustomGridView((LinearLayout)findViewById(R.id.rootHistoryGrid),0,0);
+        cgv.getPlusButton().setClickable(true);
+        cgv.getPlusButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               takePicture();
+            }
+        });
+
 
     }
 
-    public void takePicture(View v){
+    public void takePicture(){
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -130,9 +139,22 @@ public class HistoryActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
                 Bitmap bmp = BitmapFactory.decodeFile(fileUri.getPath());
-                bmp = Bitmap.createScaledBitmap(bmp,(int)(bmp.getWidth()*0.1), (int)(bmp.getHeight()*0.1), true);
-                Log.d("stufff","other stuff and more ");
-                cgv.addGridElement(new GridElement(this,bmp));
+//                bmp = Bitmap.createScaledBitmap(bmp,(int)(bmp.getWidth()*0.12), (int)(bmp.getHeight()*0.12), true);
+
+                 bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
+//                bmp = makeOneOutOfTwo(bmp,BitmapFactory.decodeResource(this.getResources(),
+//                        R.drawable.overlay));
+
+                GridElement tempGrid = new GridElement(this,bmp);
+                tempGrid.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Sends the HTTP GET for the data about this image
+                        Intent i = new Intent(HistoryActivity.this,DataLookActivity.class);
+                        startActivity(i);
+                    }
+                });
+                cgv.addGridElement(tempGrid);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
@@ -140,6 +162,33 @@ public class HistoryActivity extends Activity {
                 // Image capture failed, advise user
             }
         }
+    }
+    private Bitmap makeOneOutOfTwo(Bitmap m,Bitmap m2){
+        Bitmap finalBitmap = Bitmap.createBitmap(m.getWidth(), m.getHeight(), Bitmap.Config.ALPHA_8);
+        for(int x = 0; x < m.getWidth();x++){
+            for(int y = 0; y < m.getHeight();y++){
+                int combinedRed = getRed(m.getPixel(x,y) + getRed(m2.getPixel(x,y)));
+                int combinedGreen = getGreen(m.getPixel(x, y) + getGreen(m2.getPixel(x, y)));
+                int combinedBlue = getBlue(m.getPixel(x, y) + getBlue(m2.getPixel(x, y)));
+
+                finalBitmap.setPixel(x,y,Color.rgb(combinedRed%256,combinedGreen%256,combinedBlue%256));
+
+            }
+        }
+        return finalBitmap;
+    }
+
+
+    private int getRed(int whole){
+       return (whole >> 16) & 0xFF;
+    }
+
+    private int getBlue(int whole){
+       return (whole >> 8) & 0xFF;
+    }
+
+    private int getGreen(int whole){
+        return (whole & 0xFF);
     }
 
     private class ImageTask extends AsyncTask<Uri,Void,String> {
@@ -150,6 +199,8 @@ public class HistoryActivity extends Activity {
             Bitmap bmp = BitmapFactory.decodeFile(uri.getPath());
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
 
@@ -197,6 +248,7 @@ public class HistoryActivity extends Activity {
 
                 String getOfImage = "";
                 Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(getOfImage).getContent());
+
                 v[0].addGridElement(new GridElement(getApplicationContext(),bitmap));
 
 
