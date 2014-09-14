@@ -147,7 +147,7 @@ public class HistoryActivity extends Activity {
                  bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
 //                bmp = makeOneOutOfTwo(bmp,BitmapFactory.decodeResource(this.getResources(),
 //                        R.drawable.overlay));
-                new ImageTask().execute(fileUri);
+//                new ImageTask().execute(fileUri);
                 GridElement tempGrid = new GridElement(this,bmp);
                 tempGrid.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -205,7 +205,7 @@ public class HistoryActivity extends Activity {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
             bitmap = Bitmap.createScaledBitmap(bitmap,(int)(bitmap.getWidth()*0.4),(int)(bitmap.getHeight()*0.4),false);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             byte[] imageBytes = baos.toByteArray();
             String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
