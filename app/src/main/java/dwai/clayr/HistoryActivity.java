@@ -1,7 +1,6 @@
 package dwai.clayr;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,29 +9,23 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,8 +35,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import dwai.clayr.R;
+import org.apache.http.entity.ContentType;
 
 public class HistoryActivity extends Activity {
 
@@ -61,7 +53,7 @@ public class HistoryActivity extends Activity {
         cgv.getPlusButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               takePicture();
+                takePicture();
             }
         });
 
@@ -144,7 +136,7 @@ public class HistoryActivity extends Activity {
                 Bitmap bmp = BitmapFactory.decodeFile(fileUri.getPath());
 //                bmp = Bitmap.createScaledBitmap(bmp,(int)(bmp.getWidth()*0.12), (int)(bmp.getHeight()*0.12), true);
 
-                 bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
+                bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
 //                bmp = makeOneOutOfTwo(bmp,BitmapFactory.decodeResource(this.getResources(),
 //                        R.drawable.overlay));
 //                new ImageTask().execute(fileUri);
@@ -183,11 +175,11 @@ public class HistoryActivity extends Activity {
 
 
     private int getRed(int whole){
-       return (whole >> 16) & 0xFF;
+        return (whole >> 16) & 0xFF;
     }
 
     private int getBlue(int whole){
-       return (whole >> 8) & 0xFF;
+        return (whole >> 8) & 0xFF;
     }
 
     private int getGreen(int whole){
@@ -198,67 +190,51 @@ public class HistoryActivity extends Activity {
 
         @Override
         protected String doInBackground(Uri...u) {
+            Log.d("BAH", "test?");
             Uri uri = u[0];
-            Log.d("stuff",uri.getPath());
-            String url = "http://clayr.azurewebsites.net/decode";
-            Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            String url = "http://clayr.azurewebsites.net/";
 
-            bitmap = Bitmap.createScaledBitmap(bitmap,(int)(bitmap.getWidth()*0.4),(int)(bitmap.getHeight()*0.4),false);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-            byte[] imageBytes = baos.toByteArray();
-            String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+            HttpResponse response = null;
 
-            String getURL = url;
-            HttpClient httpclient = new DefaultHttpClient();
-
-            HttpPost httppost = new HttpPost(getURL);
-
-            HttpEntity entity = null;
-
-            HttpResponse resp = null;
             try {
-                httppost.setEntity(new StringEntity(encodedImage));
-                resp = httpclient.execute(httppost);
-                entity = resp.getEntity();
+                MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+                builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+                FileBody fb =  new FileBody(new File(uri.getPath()), ContentType.MULTIPART_FORM_DATA, "image/jpeg");
 
-            }
-            catch(Exception e){
-                //TODO: gracefully handle error
-                e.printStackTrace();
-            }
-            if(entity == null){
-                return "";
-            }
+                builder.addPart("file", fb);
 
-            String returnedString = "";
-            String line = "";
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
+                post.setEntity(builder.build());
+                response = client.execute(post);
+                HttpEntity entity = response.getEntity();
+
+                String returnedString = "";
+                String line = "";
+                BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
                 while ((line = in.readLine()) != null) {
                     returnedString += line;
                 }
                 in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                return returnedString;
             }
+            catch (ClientProtocolException e) { Log.d("BAH", e.getMessage()); }
+            catch (IOException e) { Log.d("BAH", e.getMessage()); }
 
-            return returnedString;
+            return null;
         }
-
-
 
         @Override
         protected void onPostExecute(String jsonData) {
-            Log.d("bah","OH MY GOD IT ACTUALLY WORKED\n\n\n\n\n\n\n\n\n\n\n\n" + jsonData);
-
+            Log.d("BAH", jsonData);
+            Log.d("BAH", "https://www.youtube.com/watch?v=GNrzbz6z9HQ");
         }
     }
 
     private class HistoryTask extends AsyncTask<CustomGridView,Void,String> {
-         @Override
+        @Override
         protected String doInBackground(CustomGridView...v) {
-           try {
+            try {
 
                 String getOfImage = "";
                 Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(getOfImage).getContent());
@@ -275,9 +251,9 @@ public class HistoryActivity extends Activity {
 
         }
 
-         @Override
+        @Override
         protected void onPostExecute(String requestCode){
-           if(requestCode.equals("200")){
+            if(requestCode.equals("200")){
                 return;
             }
 
