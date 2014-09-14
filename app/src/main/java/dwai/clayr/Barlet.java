@@ -19,6 +19,7 @@ public class Barlet extends View {
 
     public Barlet(Context c,int min, int max,int color, String name){
         super(c);
+        this.setId(View.generateViewId());
         this.min = min;
         this.max = max;
         this.color = color;

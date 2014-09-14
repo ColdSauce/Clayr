@@ -3,8 +3,10 @@ package dwai.clayr;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,6 +34,36 @@ public class DataLookActivity extends Activity {
 
         //This is gonna be the hardest thing I've ever done in my entire life.
         LinearLayout rootLinearLayout = ((LinearLayout)findViewById(R.id.rootLinearLayout));
+
+        ImageView rect = new ImageView(this);
+
+        //Find max relative to min
+
+        View pushView = new View(this);
+        LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT);
+        viewParams.weight = 0.7f;
+        pushView.setLayoutParams(viewParams);
+
+        rect.getLayoutParams().width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 150, getResources().getDisplayMetrics());
+        rect.getLayoutParams().height  = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 50, getResources().getDisplayMetrics());
+        rect.setBackgroundResource(R.drawable.rectangle);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        rect.setLayoutParams(layoutParams);
+
+        LinearLayout.LayoutParams triangleLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        ImageView triangle = new ImageView(this);
+        triangleLayoutParams.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 50, getResources().getDisplayMetrics());
+        triangleLayoutParams.height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 50, getResources().getDisplayMetrics());
+
+        triangle.setRotation(180);
+
+        triangle.setLayoutParams(triangleLayoutParams);
+
+
+        ((RelativeLayout)findViewById(R.id.triAndRect)).addView(rect);
+        ((LinearLayout)findViewById(R.id.layoutInsideScroll)).addView(rect);
+        ((LinearLayout)findViewById(R.id.layoutInsideScroll)).addView(triangle);
+
         WholeBar wholeBar = new WholeBar(this);
 
         wholeBar.addBarlet(4);
@@ -43,9 +75,8 @@ public class DataLookActivity extends Activity {
         wholeBar.getBarlets().get(3).setPercentageViewed(0.1);
         wholeBar.getBarlets().get(1).setPercentageViewed(0.1);
         wholeBar.getBarlets().get(2).setPercentageViewed(0.1);
-        RelativeLayout rl = new RelativeLayout(this);
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        rl.setLayoutParams(lp);
+
+
 
 
 

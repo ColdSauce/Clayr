@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -144,7 +147,7 @@ public class HistoryActivity extends Activity {
                  bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
 //                bmp = makeOneOutOfTwo(bmp,BitmapFactory.decodeResource(this.getResources(),
 //                        R.drawable.overlay));
-
+                new ImageTask().execute(fileUri);
                 GridElement tempGrid = new GridElement(this,bmp);
                 tempGrid.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -192,35 +195,46 @@ public class HistoryActivity extends Activity {
     }
 
     private class ImageTask extends AsyncTask<Uri,Void,String> {
+
         @Override
         protected String doInBackground(Uri...u) {
             Uri uri = u[0];
+            Log.d("stuff",uri.getPath());
+            String url = "http://clayr.azurewebsites.net/decode";
+            Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-            Bitmap bmp = BitmapFactory.decodeFile(uri.getPath());
+            bitmap = Bitmap.createScaledBitmap(bitmap,(int)(bitmap.getWidth()*0.4),(int)(bitmap.getHeight()*0.4),false);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] imageBytes = baos.toByteArray();
+            String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            String getURL = url;
+            HttpClient httpclient = new DefaultHttpClient();
 
-            
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
+            HttpPost httppost = new HttpPost(getURL);
 
-            HttpClient httpClient = new DefaultHttpClient();
-            //TODO: Put an actual url here.
-            String urlToPostTo = "";
-            HttpPost httpPost = new HttpPost(urlToPostTo);
-            httpPost.setEntity(new ByteArrayEntity(byteArray));
-            HttpResponse response = null;
-            try{
-                 response = httpClient.execute(httpPost);
+            HttpEntity entity = null;
+
+            HttpResponse resp = null;
+            try {
+                httppost.setEntity(new StringEntity(encodedImage));
+                resp = httpclient.execute(httppost);
+                entity = resp.getEntity();
+
             }
-            catch (IOException e){
+            catch(Exception e){
+                //TODO: gracefully handle error
                 e.printStackTrace();
+            }
+            if(entity == null){
+                return "";
             }
 
             String returnedString = "";
             String line = "";
             try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
                 while ((line = in.readLine()) != null) {
                     returnedString += line;
                 }
@@ -236,7 +250,7 @@ public class HistoryActivity extends Activity {
 
         @Override
         protected void onPostExecute(String jsonData) {
-
+            Log.d("bah","OH MY GOD IT ACTUALLY WORKED\n\n\n\n\n\n\n\n\n\n\n\n" + jsonData);
 
         }
     }
