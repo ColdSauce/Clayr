@@ -4,5 +4,6 @@
     <color name = "green">#379F7A</color>
     <color name = "orange">#F2B657</color>
     <color name = "red">#CE3D48</color>
+    <color name="grey">#eaeaea</color>
 
 </resources>

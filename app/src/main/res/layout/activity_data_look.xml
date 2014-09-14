@@ -16,77 +16,93 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="40dp"
             android:textSize = "20sp"
             android:gravity="center"
             android:text = "TEST DETAILS"
-            />
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp" />
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#eaeaea"
-            android:paddingBottom="40dp"
-            android:layout_marginBottom="30dp"
-            >
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/grey"
+            android:id="@+id/assayBlock">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/textHeaders">
+
+                <TextView
+                    android:id = "@+id/smallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize = "12sp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:text = "a protein linked to blood vessel inflammation"
+
+                    android:layout_marginRight="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignBottom="@+id/acroWord"
+                    android:layout_toRightOf="@+id/acroWord"
+                    android:editable="false"
+                    android:textAlignment="gravity"
+                    android:gravity="right" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:textSize="65sp"
+                    android:text = "CRP"
+                    android:id = "@+id/acroWord"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentLeft="false" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:textSize="65sp"
-                android:text = "CRP"
-                android:id = "@+id/acroWord"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="80dp"
-                />
-            <TextView
-                android:id = "@+id/smallTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize = "20sp"
-                android:paddingBottom="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-
-                android:text = "a protein linked to blood vessel inflammation"
-
-                />
-
-            </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content"
-            android:id = "@+id/layoutInsideScroll"
-            >
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:id = "@+id/layoutInsideScroll">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
 
 
-            <RelativeLayout
-                android:id="@+id/rlv1"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                <RelativeLayout
+                    android:id="@+id/rlv1"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
 
-                android:background="@drawable/rectangle" />
+                    android:background="@drawable/rectangle" />
 
-            <RelativeLayout
-                android:id="@+id/rlv2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/rlv1"
-                android:background="@drawable/triangle"
-                android:rotation="180" />
+                <RelativeLayout
+                    android:id="@+id/rlv2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/rlv1"
+                    android:background="@drawable/triangle"
+                    android:rotation="180" />
 
 
 
 
-                </RelativeLayout>
+                    </RelativeLayout>
 
 
-            </LinearLayout>
+                </LinearLayout>
         </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>
