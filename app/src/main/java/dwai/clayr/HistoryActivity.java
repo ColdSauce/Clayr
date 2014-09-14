@@ -36,12 +36,18 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.http.entity.ContentType;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HistoryActivity extends Activity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
     private Uri fileUri;
     private CustomGridView cgv;
+
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    public static final int MEDIA_TYPE_VIDEO = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +76,6 @@ public class HistoryActivity extends Activity {
         // start the image capture Intent
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
-
-
-
-
-    public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MEDIA_TYPE_VIDEO = 2;
 
     /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
@@ -127,29 +127,39 @@ public class HistoryActivity extends Activity {
         return mediaFile;
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
-                Bitmap bmp = BitmapFactory.decodeFile(fileUri.getPath());
-//                bmp = Bitmap.createScaledBitmap(bmp,(int)(bmp.getWidth()*0.12), (int)(bmp.getHeight()*0.12), true);
 
-                bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
-//                bmp = makeOneOutOfTwo(bmp,BitmapFactory.decodeResource(this.getResources(),
-//                        R.drawable.overlay));
-                new ImageTask().execute(fileUri);
-                GridElement tempGrid = new GridElement(this,bmp);
-                tempGrid.setOnClickListener(new View.OnClickListener() {
+
+                ClayrDataListener cdl = new ClayrDataListener() {
                     @Override
-                    public void onClick(View view) {
-                        //Sends the HTTP GET for the data about this image
-                        Intent i = new Intent(HistoryActivity.this,DataLookActivity.class);
-                        startActivity(i);
+                    public void onData(JSONObject data) {
+                        final JSONObject fData = data;
+                        final Bitmap bmp = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(fileUri.getPath()), 275, 357, true);
+
+                        Intent i = new Intent(getBaseContext(), DataLookActivity.class);
+                        i.putExtra("data", fData.toString());
+                        final Intent j = i;
+
+                        startActivity(j);
+
+                        GridElement tempGrid = new GridElement(getBaseContext(), bmp);
+                        tempGrid.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                startActivity(j);
+                            }
+                        });
+                        cgv.addGridElement(tempGrid);
                     }
-                });
-                cgv.addGridElement(tempGrid);
+                };
+                Log.d("BAH", fileUri.toString());
+                cdl.url = "http://clayr.azurewebsites.net/";
+                cdl.uri = fileUri;
+                new ImageTask().execute(cdl);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
@@ -186,16 +196,15 @@ public class HistoryActivity extends Activity {
         return (whole & 0xFF);
     }
 
-    private class ImageTask extends AsyncTask<Uri,Void,String> {
-
+    private class ImageTask extends AsyncTask<ClayrDataListener,Void,JSONObject> {
+        ClayrDataListener cdl;
         @Override
-        protected String doInBackground(Uri...u) {
-            Log.d("BAH", "test?");
-            Uri uri = u[0];
-            String url = "http://clayr.azurewebsites.net/";
+        protected JSONObject doInBackground(ClayrDataListener...cdls) {
+            this.cdl = cdls[0];
+            Uri uri = cdl.uri;
 
             HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost(url);
+            HttpPost post = new HttpPost(cdl.url);
             HttpResponse response = null;
 
             try {
@@ -216,18 +225,20 @@ public class HistoryActivity extends Activity {
                     returnedString += line;
                 }
                 in.close();
-                return returnedString;
+                return new JSONObject(returnedString);
             }
             catch (ClientProtocolException e) { Log.d("BAH", e.getMessage()); }
             catch (IOException e) { Log.d("BAH", e.getMessage()); }
+            catch (JSONException e) {  Log.d("BAH", e.getMessage()); }
 
-            return null;
+            return new JSONObject();
         }
 
         @Override
-        protected void onPostExecute(String jsonData) {
-            Log.d("BAH", jsonData);
+        protected void onPostExecute(JSONObject data) {
+            Log.d("BAH", data.toString());
             Log.d("BAH", "https://www.youtube.com/watch?v=GNrzbz6z9HQ");
+            this.cdl.onData(data);
         }
     }
 
@@ -259,8 +270,6 @@ public class HistoryActivity extends Activity {
 
         }
     }
-
-
 
     public Bitmap fastblur(Bitmap sentBitmap, int radius) {
 
