@@ -139,7 +139,7 @@ public class HistoryActivity extends Activity {
                 bmp = Bitmap.createScaledBitmap(bmp,275,357, true);
 //                bmp = makeOneOutOfTwo(bmp,BitmapFactory.decodeResource(this.getResources(),
 //                        R.drawable.overlay));
-//                new ImageTask().execute(fileUri);
+                new ImageTask().execute(fileUri);
                 GridElement tempGrid = new GridElement(this,bmp);
                 tempGrid.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -65,7 +65,7 @@ public class DataLookActivity extends Activity {
 
 
         RelativeLayout.LayoutParams pa = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-         ((RelativeLayout)findViewById(R.id.triAndRect)).setLayoutParams(pa);
+//         ((RelativeLayout)findViewById(R.id.triAndRect)).setLayoutParams(pa);
 
 
 
