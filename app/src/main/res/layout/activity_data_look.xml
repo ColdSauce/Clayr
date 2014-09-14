@@ -12,7 +12,8 @@
         android:id = "@+id/rootLinearLayout"
         android:layout_height="match_parent"
 
-        >
+        android:dividerPadding="0dp">
+
 
         <TextView
             android:layout_width="match_parent"
@@ -26,22 +27,22 @@
             android:textIsSelectable="false"
             android:textColor="@color/green" />
 
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@color/grey"
-            android:id="@+id/assayBlock"
-            android:paddingBottom="40dp">
+            android:id="@+id/wbc"
+            android:paddingBottom="40dp"
+            android:layout_marginBottom="10dp">
 
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/textHeaders">
+                android:id="@+id/wbc_textHeaders">
 
                 <TextView
-                    android:id = "@+id/smallTextView"
+                    android:id = "@+id/wbc_smallTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize = "14dp"
@@ -54,8 +55,8 @@
                     android:layout_marginRight="40dp"
                     android:layout_gravity="bottom"
                     android:layout_alignParentEnd="false"
-                    android:layout_alignBottom="@+id/acroWord"
-                    android:layout_toRightOf="@+id/acroWord"
+                    android:layout_alignBottom="@+id/wbc_acroWord"
+                    android:layout_toRightOf="@+id/wbc_acroWord"
                     android:editable="false"
                     android:textAlignment="gravity"
                     android:gravity="right"
@@ -67,7 +68,7 @@
                     android:layout_height="80dp"
                     android:textSize="65sp"
                     android:text = "CRP"
-                    android:id = "@+id/acroWord"
+                    android:id = "@+id/wbc_acroWord"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="40dp"
                     android:layout_gravity="bottom"
@@ -81,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:id = "@+id/layoutInsideScroll">
+                android:id = "@+id/wbc_layoutInsideScroll">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -91,7 +92,7 @@
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rlv1"
+                        android:id="@+id/wbc_rlv1"
                         android:clickable="false"
                         android:background="@color/lightBlue"
                         android:paddingBottom="5dp"
@@ -107,7 +108,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="50dp"
                                 android:text="3.2"
-                                android:id="@+id/textView"
+                                android:id="@+id/wbc_value"
                                 android:layout_gravity="bottom"
                                 android:layout_alignParentTop="false"
                                 android:layout_alignParentLeft="false"
@@ -125,7 +126,7 @@
                                 android:layout_height="wrap_content"
                                 android:textSize="20dp"
                                 android:text="mg/L"
-                                android:id="@+id/textView2"
+                                android:id="@+id/wbc_unit"
                                 android:layout_gravity="bottom"
                                 android:layout_alignParentTop="false"
                                 android:layout_alignParentLeft="false"
@@ -144,7 +145,7 @@
                     <FrameLayout
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:id="@+id/rlv2"
+                        android:id="@+id/wbc_rlv2"
                         android:background="@drawable/triangle"
                         android:layout_margin="0dp"
                         android:clickable="false"
@@ -155,12 +156,589 @@
                     <FrameLayout
                         android:layout_width="fill_parent"
                         android:layout_height="30dp"
-                        android:id="@+id/">
-
+                        android:id="@+id/wbc_metabar">
                         <FrameLayout
                             android:layout_width="fill_parent"
                             android:layout_height="10dp"
-                            android:foreground="@color/green"></FrameLayout>
+                            android:foreground="@color/green">
+                            android:id="@+id/wbc_bar">
+                            </FrameLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/grey"
+            android:id="@+id/rbc"
+            android:paddingBottom="40dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/rbc_textHeaders">
+
+                <TextView
+                    android:id = "@+id/rbc_smallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize = "14dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:text = "a protein linked to blood vessel inflammation"
+
+                    android:layout_marginRight="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignBottom="@+id/rbc_acroWord"
+                    android:layout_toRightOf="@+id/rbc_acroWord"
+                    android:editable="false"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textIsSelectable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:textSize="65sp"
+                    android:text = "CRP"
+                    android:id = "@+id/rbc_acroWord"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentLeft="false"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:id = "@+id/rbc_layoutInsideScroll">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rbc_rlv1"
+                        android:clickable="false"
+                        android:background="@color/lightBlue"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="50dp"
+                                android:text="3.2"
+                                android:id="@+id/rbc_value"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:text="mg/L"
+                                android:id="@+id/rbc_unit"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:id="@+id/rbc_rlv2"
+                        android:background="@drawable/triangle"
+                        android:layout_margin="0dp"
+                        android:clickable="false"
+                        android:foreground="@color/lightBlue">
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/rbc_metabar">
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="10dp"
+                            android:foreground="@color/green">
+                            android:id="@+id/rbc_bar">
+                        </FrameLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/grey"
+            android:id="@+id/hemo"
+            android:paddingBottom="40dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/hemo_textHeaders">
+
+                <TextView
+                    android:id = "@+id/hemo_smallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize = "14dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:text = "a protein linked to blood vessel inflammation"
+
+                    android:layout_marginRight="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignBottom="@+id/hemo_acroWord"
+                    android:layout_toRightOf="@+id/hemo_acroWord"
+                    android:editable="false"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textIsSelectable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:textSize="65sp"
+                    android:text = "CRP"
+                    android:id = "@+id/hemo_acroWord"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentLeft="false"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:id = "@+id/hemo_layoutInsideScroll">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hemo_rlv1"
+                        android:clickable="false"
+                        android:background="@color/lightBlue"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="50dp"
+                                android:text="3.2"
+                                android:id="@+id/hemo_value"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:text="mg/L"
+                                android:id="@+id/hemo_unit"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:id="@+id/hemo_rlv2"
+                        android:background="@drawable/triangle"
+                        android:layout_margin="0dp"
+                        android:clickable="false"
+                        android:foreground="@color/lightBlue">
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/hemo_metabar">
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="10dp"
+                            android:foreground="@color/green">
+                            android:id="@+id/hemo_bar">
+                        </FrameLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/grey"
+            android:id="@+id/hematocrit"
+            android:paddingBottom="40dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/hematocrit_textHeaders">
+
+                <TextView
+                    android:id = "@+id/hematocrit_smallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize = "14dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:text = "a protein linked to blood vessel inflammation"
+
+                    android:layout_marginRight="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignBottom="@+id/hematocrit_acroWord"
+                    android:layout_toRightOf="@+id/hematocrit_acroWord"
+                    android:editable="false"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textIsSelectable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:textSize="65sp"
+                    android:text = "CRP"
+                    android:id = "@+id/hematocrit_acroWord"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentLeft="false"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:id = "@+id/hematocrit_layoutInsideScroll">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hemo_rlv1"
+                        android:clickable="false"
+                        android:background="@color/lightBlue"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="50dp"
+                                android:text="3.2"
+                                android:id="@+id/hemo_value"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:text="mg/L"
+                                android:id="@+id/hemo_unit"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:id="@+id/hemo_rlv2"
+                        android:background="@drawable/triangle"
+                        android:layout_margin="0dp"
+                        android:clickable="false"
+                        android:foreground="@color/lightBlue">
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/hemo_metabar">
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="10dp"
+                            android:foreground="@color/green">
+                            android:id="@+id/hemo_bar">
+                        </FrameLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/grey"
+            android:id="@+id/mcv"
+            android:paddingBottom="40dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/mcv_textHeaders">
+
+                <TextView
+                    android:id = "@+id/mcv_smallTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize = "14dp"
+                    android:paddingBottom="15dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:text = "a protein linked to blood vessel inflammation"
+
+                    android:layout_marginRight="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignBottom="@+id/mcv_acroWord"
+                    android:layout_toRightOf="@+id/mcv_acroWord"
+                    android:editable="false"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textIsSelectable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:textSize="65sp"
+                    android:text = "CRP"
+                    android:id = "@+id/mcv_acroWord"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentLeft="false"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:id = "@+id/mcv_layoutInsideScroll">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hemo_rlv1"
+                        android:clickable="false"
+                        android:background="@color/lightBlue"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="50dp"
+                                android:text="3.2"
+                                android:id="@+id/hemo_value"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:text="mg/L"
+                                android:id="@+id/hemo_unit"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:id="@+id/hemo_rlv2"
+                        android:background="@drawable/triangle"
+                        android:layout_margin="0dp"
+                        android:clickable="false"
+                        android:foreground="@color/lightBlue">
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/hemo_metabar">
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="10dp"
+                            android:foreground="@color/green">
+                            android:id="@+id/hemo_bar">
+                        </FrameLayout>
                     </FrameLayout>
 
                 </LinearLayout>
