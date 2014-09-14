@@ -17,11 +17,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:textSize = "20sp"
+            android:textSize = "15dp"
             android:gravity="center"
             android:text = "TEST DETAILS"
             android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:singleLine="false"
+            android:textIsSelectable="false"
+            android:textColor="@color/green" />
 
 
         <LinearLayout
@@ -29,7 +32,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@color/grey"
-            android:id="@+id/assayBlock">
+            android:id="@+id/assayBlock"
+            android:paddingBottom="40dp">
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -40,7 +44,7 @@
                     android:id = "@+id/smallTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize = "12sp"
+                    android:textSize = "14dp"
                     android:paddingBottom="15dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginLeft="20dp"
@@ -54,7 +58,9 @@
                     android:layout_toRightOf="@+id/acroWord"
                     android:editable="false"
                     android:textAlignment="gravity"
-                    android:gravity="right" />
+                    android:gravity="right"
+                    android:textColor="@color/green"
+                    android:textIsSelectable="false" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,7 +72,9 @@
                     android:layout_marginLeft="40dp"
                     android:layout_gravity="bottom"
                     android:layout_alignParentTop="false"
-                    android:layout_alignParentLeft="false" />
+                    android:layout_alignParentLeft="false"
+                    android:textColor="@color/green"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <LinearLayout
@@ -74,34 +82,91 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"
                 android:id = "@+id/layoutInsideScroll">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
 
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rlv1"
+                        android:clickable="false"
+                        android:background="@color/lightBlue"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp">
 
-                <RelativeLayout
-                    android:id="@+id/rlv1"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
-                    android:background="@drawable/rectangle" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="50dp"
+                                android:text="3.2"
+                                android:id="@+id/textView"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
 
-                <RelativeLayout
-                    android:id="@+id/rlv2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/rlv1"
-                    android:background="@drawable/triangle"
-                    android:rotation="180" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:text="mg/L"
+                                android:id="@+id/textView2"
+                                android:layout_gravity="bottom"
+                                android:layout_alignParentTop="false"
+                                android:layout_alignParentLeft="false"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="0dp"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
+                    </FrameLayout>
 
+                    <FrameLayout
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:id="@+id/rlv2"
+                        android:background="@drawable/triangle"
+                        android:layout_margin="0dp"
+                        android:clickable="false"
+                        android:foreground="@color/lightBlue">
 
+                    </FrameLayout>
 
-                    </RelativeLayout>
+                    <FrameLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/">
 
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="10dp"
+                            android:foreground="@color/green"></FrameLayout>
+                    </FrameLayout>
 
                 </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
