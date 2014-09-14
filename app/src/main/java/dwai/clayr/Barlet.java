@@ -12,12 +12,12 @@ import android.widget.LinearLayout;
  */
 public class Barlet extends View {
     private boolean isSelected = false;
-    private int min,max;
+    private double min,max;
     private int color;
     private String name;
 
 
-    public Barlet(Context c,int min, int max,int color, String name){
+    public Barlet(Context c,double min, double max,int color, String name){
         super(c);
         this.setId(View.generateViewId());
         this.min = min;
@@ -30,16 +30,12 @@ public class Barlet extends View {
         android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
                 0,(int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 100, getResources().getDisplayMetrics()),(float)percentageViewed);
         this.setLayoutParams(params);
-
-
-
     }
 
     public void setSelected(boolean isSelected){
         if(isSelected){
-            //TODO: Convert this to dp
             float dp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, 70, getResources().getDisplayMetrics());
-          this.setMinimumHeight((int)dp);
+            this.setMinimumHeight((int)dp);
         }
         this.isSelected = isSelected;
     }
@@ -48,11 +44,11 @@ public class Barlet extends View {
         return isSelected;
     }
 
-    public int getMin() {
+    public double getMin() {
         return min;
     }
 
-    public int getMax() {
+    public double getMax() {
         return max;
     }
 

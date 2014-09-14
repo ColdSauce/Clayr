@@ -53,7 +53,7 @@ public class WholeBar extends LinearLayout {
     }
 
     //Can only add 4!
-    public void addBarlet(int max){
+    public void addBarlet(double max){
         Barlet barletToAdd = null;
         Color color;
 
